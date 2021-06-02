@@ -29,8 +29,8 @@ class FoodCategories {
   FoodCategories({this.name, this.image});
 
   FoodCategories.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    image = json['image'];
+    name = json['image'];
+    image = json['name'];
   }
 
   Map<String, dynamic> toJson() {

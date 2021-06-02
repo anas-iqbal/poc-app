@@ -28,8 +28,10 @@ class FoodCategoryTile extends StatelessWidget {
                 imageUrl: imgPath,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: const EdgeInsets.all(22.0),
                   child: CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(AppTheme.colorPrimary),
                       value: downloadProgress.progress),
                 ),
                 errorWidget: (context, url, error) => Icon(Icons.error),
