@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:poc_app/screens/detail/food_detail_screen.dart';
 import 'package:poc_app/screens/home/home_controller.dart';
 import 'package:poc_app/utils/app_theme.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:poc_app/utils/loader_widget.dart';
+import 'package:poc_app/widgets/appbar_widget.dart';
 import 'package:poc_app/widgets/food_category_tile.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -17,21 +17,9 @@ class MyHomePage extends StatelessWidget {
       () => LoaderWidget(
         isTrue: _homeController.isLoading.value,
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: AppTheme.colorPrimary,
-            title: Text("Home"),
-            centerTitle: true,
-            actions: [
-              Padding(
-                padding: EdgeInsets.only(right: width * 0.05),
-                child: Icon(
-                  Icons.shopping_basket,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-              ),
-            ],
-          ),
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(AppBar().preferredSize.height),
+              child: AppBarWidget(title: 'Home')),
           body: Container(
             color: AppTheme.colorPrimary,
             child: Padding(
@@ -71,7 +59,7 @@ class MyHomePage extends StatelessWidget {
                                       _homeController.selectedFoodCat =
                                           _homeController
                                               .listCategories[index].name;
-                                      Get.to(FoodDetailPage());
+                                      Get.to(() => FoodDetailPage());
                                     },
                                     child: FoodCategoryTile(
                                         imgPath: _homeController

@@ -8,7 +8,7 @@ class FoodDetailController extends GetxController {
   final HomeController homeController = Get.find();
 
   var isLoading = false.obs;
-  var listCategories = <FoodCatDetails>[].obs;
+  var listDetail = <FoodCatDetails>[].obs;
 
   @override
   void onInit() {
@@ -20,15 +20,14 @@ class FoodDetailController extends GetxController {
     try {
       isLoading(true);
       var resp = await _foodService.getFoodDetailResp();
-      listCategories.value = resp.foodCatDetails;
+      var listOfAllFooods = resp.foodCatDetails;
+      listDetail.value = listOfAllFooods
+          .where((i) => i.category.contains(homeController.selectedFoodCat))
+          .toList();
     } catch (e) {
       //ExceptionHandler(e);
     } finally {
       isLoading(false);
     }
-  }
-
-  filterSelectedFoodCategory(){
-    
   }
 }
