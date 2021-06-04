@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:poc_app/screens/detail/food_detail_screen.dart';
 import 'package:poc_app/screens/home/home_controller.dart';
 import 'package:poc_app/utils/app_theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -67,7 +68,10 @@ class MyHomePage extends StatelessWidget {
                                 itemBuilder: (BuildContext context, int index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      
+                                      _homeController.selectedFoodCat =
+                                          _homeController
+                                              .listCategories[index].name;
+                                      Get.to(FoodDetailPage());
                                     },
                                     child: FoodCategoryTile(
                                         imgPath: _homeController

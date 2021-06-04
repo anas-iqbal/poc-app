@@ -8,6 +8,8 @@ class HomeController extends GetxController {
   var listCategories = <FoodCategories>[].obs;
   var isLoading = false.obs;
 
+  String selectedFoodCat = "";
+
   @override
   void onInit() {
     super.onInit();
