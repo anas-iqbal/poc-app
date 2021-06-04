@@ -48,27 +48,32 @@ class MyHomePage extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          Expanded(
-                            child: ListView.builder(
-                                padding: const EdgeInsets.all(8),
-                                itemCount:
-                                    _homeController.listCategories.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      _homeController.selectedFoodCat =
-                                          _homeController
-                                              .listCategories[index].name;
-                                      Get.to(() => FoodDetailPage());
-                                    },
-                                    child: FoodCategoryTile(
-                                        imgPath: _homeController
-                                            .listCategories[index].image,
-                                        title: _homeController
-                                            .listCategories[index].name),
-                                  );
-                                }),
-                          )
+                          _homeController.listCategories.isNotEmpty
+                              ? Expanded(
+                                  child: ListView.builder(
+                                      padding: const EdgeInsets.all(8),
+                                      itemCount:
+                                          _homeController.listCategories.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            _homeController.selectedFoodCat =
+                                                _homeController
+                                                    .listCategories[index].name;
+                                            Get.to(() => FoodDetailPage());
+                                          },
+                                          child: FoodCategoryTile(
+                                              imgPath: _homeController
+                                                  .listCategories[index].image,
+                                              title: _homeController
+                                                  .listCategories[index].name),
+                                        );
+                                      }),
+                                )
+                              : _homeController.isLoading.value
+                                  ? Container()
+                                  : Center(child: Text("Food item found"))
                         ],
                       ),
                     ),

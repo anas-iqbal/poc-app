@@ -59,7 +59,17 @@ class FoodDetailPage extends StatelessWidget {
                                       imgPath: _detailController
                                           .listDetail[index].image,
                                       title: _detailController
-                                          .listDetail[index].name);
+                                          .listDetail[index].name,
+                                      onBasketClick: (selectedFood) {
+                                        _detailController
+                                            .homeController.selectedFoodsList
+                                            .add(selectedFood);
+                                      },
+                                      onFavouriteClick: (selectedFood) {
+                                        _detailController
+                                            .homeController.selectedFoodsList
+                                            .add(selectedFood);
+                                      });
                                 }),
                           )
                         ],
