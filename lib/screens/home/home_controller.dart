@@ -28,6 +28,7 @@ class HomeController extends GetxController {
       var resp = await _foodService.getFoodCategory();
       listCategories.value = resp.foodCategories;
     } catch (e) {
+      // this is where when I throw exception from api class this is where i handle the msg and show dialog or do some operation on the bassis of error code
       //ExceptionHandler(e);
     } finally {
       isLoading(false);
