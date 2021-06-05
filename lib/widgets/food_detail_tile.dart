@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:poc_app/models/food_detail_response_model.dart';
+import 'package:poc_app/screens/detail/food_detail_controller.dart';
 import 'package:poc_app/utils/app_theme.dart';
 
 class FoodDetailTile extends StatelessWidget {
@@ -9,14 +12,16 @@ class FoodDetailTile extends StatelessWidget {
   final FoodCatDetails selectedFood;
   final Function(FoodCatDetails food) onBasketClick;
   final Function(FoodCatDetails food) onFavouriteClick;
-  FoodDetailTile(
-      {Key key,
-      @required this.imgPath,
-      @required this.title,
-      @required this.onBasketClick,
-      @required this.onFavouriteClick,
-      @required this.selectedFood})
-      : super(key: key);
+  final FoodDetailController foodDetailController;
+  FoodDetailTile({
+    Key key,
+    @required this.imgPath,
+    @required this.title,
+    @required this.onBasketClick,
+    @required this.onFavouriteClick,
+    @required this.selectedFood,
+    @required this.foodDetailController,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -35,7 +40,7 @@ class FoodDetailTile extends StatelessWidget {
                 width: double.infinity,
                 imageUrl: imgPath,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    Text("Loading.."),
+                    Center(child: Text("Loading..")),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
               SizedBox(
@@ -62,7 +67,9 @@ class FoodDetailTile extends StatelessWidget {
                               onFavouriteClick(selectedFood);
                             },
                             child: Icon(
-                              Icons.star_border,
+                              isFavourite()
+                                  ? Icons.star_rate
+                                  : Icons.star_border,
                               color: AppTheme.colorPrimary,
                               size: 30.0,
                             ),
@@ -96,5 +103,17 @@ class FoodDetailTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool isFavourite() {
+    if (foodDetailController.listFavourite != null) {
+      var alreadyExist = foodDetailController.listFavourite.firstWhere(
+          (x) => x.name.contains(selectedFood.name),
+          orElse: () => null);
+      if (alreadyExist != null) {
+        return alreadyExist.isFavourite;
+      }
+    }
+    return false;
   }
 }

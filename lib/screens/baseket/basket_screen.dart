@@ -20,7 +20,10 @@ class BasketPage extends StatelessWidget {
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(AppBar().preferredSize.height),
-              child: AppBarWidget(title: 'Baseket',showBasket: false,)),
+              child: AppBarWidget(
+                title: 'Baseket',
+                showBasket: false,
+              )),
           body: Container(
             color: AppTheme.colorPrimary,
             child: Padding(
@@ -38,22 +41,17 @@ class BasketPage extends StatelessWidget {
                     child: SizedBox.expand(
                       child: _basketController
                               .homeController.selectedFoodsList.isNotEmpty
-                          ? Expanded(
-                              child: ListView.builder(
-                                  padding: const EdgeInsets.all(8),
-                                  itemCount: _basketController
-                                      .homeController.selectedFoodsList.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return FoodCategoryTile(
-                                        imgPath: _basketController
-                                            .homeController
-                                            .selectedFoodsList[index]
-                                            .image,
-                                        title: _basketController.homeController
-                                            .selectedFoodsList[index].name);
-                                  }),
-                            )
+                          ? ListView.builder(
+                              padding: const EdgeInsets.all(8),
+                              itemCount: _basketController
+                                  .homeController.selectedFoodsList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return FoodCategoryTile(
+                                    imgPath: _basketController.homeController
+                                        .selectedFoodsList[index].image,
+                                    title: _basketController.homeController
+                                        .selectedFoodsList[index].name);
+                              })
                           : _basketController.homeController.isLoading.value
                               ? Container()
                               : Center(child: Text("No item found")),

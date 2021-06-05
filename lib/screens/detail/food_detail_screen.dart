@@ -56,20 +56,23 @@ class FoodDetailPage extends StatelessWidget {
                                 itemCount: _detailController.listDetail.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return FoodDetailTile(
-                                      imgPath: _detailController
-                                          .listDetail[index].image,
-                                      title: _detailController
-                                          .listDetail[index].name,
-                                      onBasketClick: (selectedFood) {
-                                        _detailController
-                                            .homeController.selectedFoodsList
-                                            .add(selectedFood);
-                                      },
-                                      onFavouriteClick: (selectedFood) {
-                                        _detailController
-                                            .homeController.selectedFoodsList
-                                            .add(selectedFood);
-                                      });
+                                    imgPath: _detailController
+                                        .listDetail[index].image,
+                                    title: _detailController
+                                        .listDetail[index].name,
+                                    onBasketClick: (selectedFood) {
+                                      _detailController
+                                          .homeController.selectedFoodsList
+                                          .add(selectedFood);
+                                    },
+                                    onFavouriteClick: (selectedFood) {
+                                      _detailController
+                                          .markFavourite(selectedFood);
+                                    },
+                                    selectedFood:
+                                        _detailController.listDetail[index],
+                                    foodDetailController: _detailController,
+                                  );
                                 }),
                           )
                         ],

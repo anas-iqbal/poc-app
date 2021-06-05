@@ -11,6 +11,5 @@ class BasketController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    
   }
 }

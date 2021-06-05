@@ -26,13 +26,15 @@ class FoodCatDetails {
   String name;
   String category;
   String image;
+  bool isFavourite = false;
 
-  FoodCatDetails({this.name, this.category, this.image});
+  FoodCatDetails({this.name, this.category, this.image, this.isFavourite});
 
   FoodCatDetails.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     category = json['category'];
     image = json['image'];
+    isFavourite = false;
   }
 
   Map<String, dynamic> toJson() {
