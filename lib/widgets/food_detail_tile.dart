@@ -47,7 +47,6 @@ class FoodDetailTile extends StatelessWidget {
                 height: 8,
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.06,
                 child: Column(
                   children: [
                     Text(
@@ -106,10 +105,10 @@ class FoodDetailTile extends StatelessWidget {
   }
 
   bool isFavourite() {
-    if (foodDetailController.listFavourite != null) {
-      var alreadyExist = foodDetailController.listFavourite.firstWhere(
-          (x) => x.name.contains(selectedFood.name),
-          orElse: () => null);
+    if (foodDetailController.homeController.listFavourite != null) {
+      var alreadyExist = foodDetailController.homeController.listFavourite
+          .firstWhere((x) => x.name.contains(selectedFood.name),
+              orElse: () => null);
       if (alreadyExist != null) {
         return alreadyExist.isFavourite;
       }

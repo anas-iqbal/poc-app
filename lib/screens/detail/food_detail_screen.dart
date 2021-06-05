@@ -61,9 +61,7 @@ class FoodDetailPage extends StatelessWidget {
                                     title: _detailController
                                         .listDetail[index].name,
                                     onBasketClick: (selectedFood) {
-                                      _detailController
-                                          .homeController.selectedFoodsList
-                                          .add(selectedFood);
+                                      _detailController.addItemOnBasket(selectedFood);
                                     },
                                     onFavouriteClick: (selectedFood) {
                                       _detailController

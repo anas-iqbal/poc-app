@@ -12,13 +12,11 @@ class FoodDetailController extends GetxController {
   var isLoading = false.obs;
 
   var listDetail = <FoodCatDetails>[].obs;
-  List<FoodCatDetails> listFavourite = [];
 
   @override
   void onInit() {
     super.onInit();
     getFoodCategoryDetail();
-    getMarkedFavouriteFoods();
   }
 
   getFoodCategoryDetail() async {
@@ -36,6 +34,14 @@ class FoodDetailController extends GetxController {
     }
   }
 
+  addItemOnBasket(FoodCatDetails selectedFood) {
+    var alreadyExist = homeController.basketList
+        .firstWhere((x) => x.name == selectedFood.name, orElse: () => null);
+    if (alreadyExist == null) {
+      homeController.basketList.add(selectedFood);
+    }
+  }
+
   markFavourite(FoodCatDetails food) async {
     listDetail.forEach((element) {
       if (element.name == food.name) {
@@ -46,27 +52,17 @@ class FoodDetailController extends GetxController {
   }
 
   updateSavedList(FoodCatDetails selectedItem, bool updateFavStatus) async {
-    var alreadyExist = listFavourite
+    var alreadyExist = homeController.listFavourite
         .firstWhere((x) => x.name == selectedItem.name, orElse: () => null);
     if (alreadyExist == null && selectedItem.isFavourite) {
-      listFavourite.add(selectedItem);
+      homeController.listFavourite.add(selectedItem);
     } else {
       if (!updateFavStatus) {
-        listFavourite.removeWhere((item) => item.name == selectedItem.name);
+        homeController.listFavourite
+            .removeWhere((item) => item.name == selectedItem.name);
       }
     }
-    getStorage.write('favouriteItem', listFavourite);
+    getStorage.write('favouriteItem', homeController.listFavourite);
     listDetail.refresh();
-  }
-
-  getMarkedFavouriteFoods() {
-    final getStorage = GetStorage();
-    listFavourite = [];
-    var favMap = getStorage.read('favouriteItem');
-    if (favMap != null) {
-      for (var e in favMap) {
-        listFavourite.add(e);
-      }
-    }
   }
 }

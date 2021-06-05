@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:poc_app/models/food_caregory_model.dart';
 import 'package:poc_app/models/food_detail_response_model.dart';
 import 'package:poc_app/services/food_service.dart';
@@ -7,7 +8,8 @@ class HomeController extends GetxController {
   final FoodService _foodService = FoodService();
 
   var listCategories = <FoodCategories>[].obs;
-  var selectedFoodsList = <FoodCatDetails>[].obs;
+  var basketList = <FoodCatDetails>[].obs;
+  List<FoodCatDetails> listFavourite = [];
 
   var isLoading = false.obs;
 
@@ -17,6 +19,7 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     getFoodCategories();
+    getMarkedFavouriteFoods();
   }
 
   getFoodCategories() async {
@@ -28,6 +31,18 @@ class HomeController extends GetxController {
       //ExceptionHandler(e);
     } finally {
       isLoading(false);
+    }
+  }
+
+  getMarkedFavouriteFoods() {
+    final getStorage = GetStorage();
+    listFavourite = [];
+    var favMap = getStorage.read('favouriteItem');
+    if (favMap != null) {
+      for (var e in favMap) {
+        var foodItem = FoodCatDetails.fromJson(e);
+        listFavourite.add(foodItem);
+      }
     }
   }
 }

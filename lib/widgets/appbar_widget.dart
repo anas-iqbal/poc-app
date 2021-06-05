@@ -37,7 +37,7 @@ class AppBarWidget extends StatelessWidget {
                         size: 30.0,
                       ),
                     ),
-                    if (homeController.selectedFoodsList.isNotEmpty)
+                    if (homeController.basketList.isNotEmpty)
                       Positioned(
                         top: 0,
                         right: 0,

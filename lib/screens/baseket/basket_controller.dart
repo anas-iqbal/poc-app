@@ -12,4 +12,9 @@ class BasketController extends GetxController {
   void onInit() {
     super.onInit();
   }
+
+  removeItem(String title) {
+    homeController.basketList.removeWhere((item) => item.name == title);
+    homeController.basketList.refresh();
+  }
 }

@@ -6,6 +6,7 @@ import 'package:poc_app/screens/home/home_controller.dart';
 import 'package:poc_app/utils/app_theme.dart';
 import 'package:poc_app/utils/loader_widget.dart';
 import 'package:poc_app/widgets/appbar_widget.dart';
+import 'package:poc_app/widgets/basket_tile_widget.dart';
 import 'package:poc_app/widgets/food_category_tile.dart';
 
 class BasketPage extends StatelessWidget {
@@ -40,17 +41,21 @@ class BasketPage extends StatelessWidget {
                         EdgeInsets.only(right: 18.0, left: 18.0, top: 18.0),
                     child: SizedBox.expand(
                       child: _basketController
-                              .homeController.selectedFoodsList.isNotEmpty
+                              .homeController.basketList.isNotEmpty
                           ? ListView.builder(
                               padding: const EdgeInsets.all(8),
                               itemCount: _basketController
-                                  .homeController.selectedFoodsList.length,
+                                  .homeController.basketList.length,
                               itemBuilder: (BuildContext context, int index) {
-                                return FoodCategoryTile(
-                                    imgPath: _basketController.homeController
-                                        .selectedFoodsList[index].image,
-                                    title: _basketController.homeController
-                                        .selectedFoodsList[index].name);
+                                return BaseketTileWidget(
+                                  imgPath: _basketController.homeController
+                                      .basketList[index].image,
+                                  title: _basketController.homeController
+                                      .basketList[index].name,
+                                  onRemoveClick: (title) {
+                                    _basketController.removeItem(title);
+                                  },
+                                );
                               })
                           : _basketController.homeController.isLoading.value
                               ? Container()
