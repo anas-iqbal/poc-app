@@ -110,7 +110,7 @@ class FoodDetailTile extends StatelessWidget {
           .firstWhere((x) => x.name.contains(selectedFood.name),
               orElse: () => null);
       if (alreadyExist != null) {
-        return alreadyExist.isFavourite;
+        return true;
       }
     }
     return false;

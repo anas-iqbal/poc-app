@@ -26,7 +26,7 @@ class FoodCatDetails {
   String name;
   String category;
   String image;
-  bool isFavourite = false;
+  bool isFavourite;
 
   FoodCatDetails({this.name, this.category, this.image, this.isFavourite});
 
@@ -34,7 +34,7 @@ class FoodCatDetails {
     name = json['name'];
     category = json['category'];
     image = json['image'];
-    isFavourite = false;
+    isFavourite = json['isFavourite'] == null ? false : json['isFavourite'];
   }
 
   Map<String, dynamic> toJson() {
