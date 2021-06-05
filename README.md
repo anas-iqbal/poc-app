@@ -2,15 +2,19 @@
 
 POC App
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+POC project build in Flutter.
 
-A few resources to get you started if this is your first Flutter project:
+Project Description (Tools):
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+I have decided to built this app with Flutter and used GetX for statement management, I gone throught the requirements and decide to choose GetX becauase I think for this requirement GetX could do the job perfectly though if we have more complicated or high rich apps then we can also look out for other options like Provider etc. I guess it all depends on time and requirements.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Used simple material app design and used GetX storage for saving data local DB. Used Cached Library for loading images from url so it doesn't have to load each time. 
+
+Drawback
+
+I think the biggest problem with cross platform technologies is optmization, we can just render whole screen like in Flutter so we have to do statement management more carefully.
+
+Improvment.
+
+Well, couldn't give much time else would have worked on more UI and use GetX more efficiently and use it more features.
